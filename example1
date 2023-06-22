@@ -1,0 +1,28 @@
+// Import necessary libraries
+const cv = require('opencv4nodejs');
+
+/**
+ * This function takes an image file path as input and detects its features.
+ * 
+ * @param {string} imagePath - The file path of the image to be processed
+ * @returns {Object} - An object containing the detected features of the image
+ */
+function detectPictureFeatures(imagePath) {
+  try {
+    // Load the image
+    const img = cv.imread(imagePath);
+
+    // Convert the image to grayscale
+    const grayImg = img.bgrToGray();
+
+    // Detect the features of the image
+    const features = grayImg.goodFeaturesToTrack();
+
+    // Return the detected features
+    return features;
+  } catch (error) {
+    // Log the error
+    console.error(`Error: ${error}`);
+    return null;
+  }
+}
